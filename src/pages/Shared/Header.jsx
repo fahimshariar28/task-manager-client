@@ -1,6 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
+  const { user, logOut } = useAuth();
+
   const headerOptions = (
     <>
       <li>
@@ -11,22 +14,26 @@ const Header = () => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/yourtask"
-          className={({ isActive }) => (isActive ? "active-link" : "link")}
-        >
-          Your Task
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/addtask"
-          className={({ isActive }) => (isActive ? "active-link" : "link")}
-        >
-          Add Task
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/yourtask"
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+            >
+              Your Task
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/addtask"
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+            >
+              Add Task
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -64,9 +71,25 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{headerOptions}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login">
-          <button className="btn btn-primary">Login</button>
-        </Link>
+        {!user ? (
+          <Link to="/login">
+            <button className="btn btn-primary">Login</button>
+          </Link>
+        ) : (
+          <>
+            {user?.photoURL && (
+              <div className="avatar">
+                <div className="w-10 mr-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img src={user.photoURl} />
+                </div>
+              </div>
+            )}
+
+            <button onClick={logOut} className="btn btn-error">
+              Logout
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
