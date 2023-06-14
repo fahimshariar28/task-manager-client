@@ -65,7 +65,7 @@ const Register = () => {
             <span className="label-text">Photo Url</span>
           </label>
           <input
-            {...register("photoUrl", { required: true })}
+            {...register("photoUrl")}
             type="text"
             placeholder="Your Photo Url"
             className="input input-bordered"
