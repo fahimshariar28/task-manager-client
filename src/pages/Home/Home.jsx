@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
+  const { user } = useAuth();
   return (
     <div>
       <div className="hero min-h-screen bg-[url('https://i.ibb.co/6DftRB2/1-Svz-Kct-RCi8bw-B0-QPd-OZk-BP0p-Rhs-Oq-Zpl0wjs6y0.png')]">
@@ -10,9 +12,17 @@ const Home = () => {
             <h2 className="mb-5 text-5xl font-bold">
               Organize your <br /> work and life, finally.
             </h2>
-            <Link to="/register">
-              <button className="btn btn-primary btn-md">Start for Free</button>
-            </Link>
+            {!user ? (
+              <Link to="/register">
+                <button className="btn btn-primary btn-md">
+                  Start for Free
+                </button>
+              </Link>
+            ) : (
+              <Link to="/yourtask">
+                <button className="btn btn-primary btn-md">Your Task</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
