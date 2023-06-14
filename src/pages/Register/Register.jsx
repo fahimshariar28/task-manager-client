@@ -24,7 +24,7 @@ const Register = () => {
         console.log(result);
         updateUserProfile(name, photoUrl).then(() => {
           const savedUser = { name, email, image: photoUrl };
-          fetch("http://localhost:5000/adduser", {
+          fetch("https://task-manager-server-dun.vercel.app/adduser", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(savedUser),
