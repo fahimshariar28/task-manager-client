@@ -29,6 +29,16 @@ const YourTask = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axiosSecure.delete(`/deleteTask?id=${id}`);
+      const { data } = await axiosSecure.get("/tasks");
+      setTasks(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center">
@@ -47,12 +57,18 @@ const YourTask = () => {
                 <h2 className="card-title">{task.taskName}</h2>
                 <p>{task.taskDescription}</p>
                 <p>{task.date}</p>
+                {task.status === "incomplete" ? (
+                  <p className="text-red-600">Incomplete</p>
+                ) : (
+                  <p className="text-primary">Complete</p>
+                )}
                 <div className="card-actions justify-end">
-                  {task.status === "incomplete" ? (
-                    <p className="text-red-600">Incomplete</p>
-                  ) : (
-                    <p className="text-primary">Complete</p>
-                  )}
+                  <button
+                    onClick={() => handleDelete(task._id)}
+                    className="btn btn-error"
+                  >
+                    Delete
+                  </button>
                   {task.status === "incomplete" && (
                     <button
                       onClick={() => handleComplete(task._id)}
