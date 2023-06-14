@@ -39,8 +39,7 @@ const YourTask = () => {
 
   return (
     <div>
-      <h2 className="text-2xl text-center">Your Tasks</h2>
-      {
+      {tasks.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
           {tasks.map((task) => (
             <div key={task._id} className="card  bg-base-200 ">
@@ -67,7 +66,11 @@ const YourTask = () => {
             </div>
           ))}
         </div>
-      }
+      ) : (
+        <div className="flex justify-center items-center">
+          <h2 className="text-2xl text-center">No Tasks, Go to Add task</h2>
+        </div>
+      )}
     </div>
   );
 };
