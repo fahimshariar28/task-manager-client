@@ -1,6 +1,7 @@
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const YourTask = () => {
   const { user, loading } = useAuth();
@@ -24,6 +25,40 @@ const YourTask = () => {
       await axiosSecure.patch(`/completeTask?id=${id}`);
       const { data } = await axiosSecure.get("/tasks");
       setTasks(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEdit = async (task) => {
+    try {
+      const result = await Swal.fire({
+        title: "Edit Task",
+        html:
+          `<input id="swal-input-taskName" class="swal2-input" value="${task.taskName}" placeholder="Task Name">` +
+          `<input id="swal-input-taskDescription" class="swal2-input" value="${task.taskDescription}" placeholder="Task Description">`,
+        showCancelButton: true,
+        focusConfirm: false,
+        preConfirm: () => {
+          return {
+            taskName: document.getElementById("swal-input-taskName").value,
+            taskDescription: document.getElementById(
+              "swal-input-taskDescription"
+            ).value,
+          };
+        },
+      });
+
+      if (result.isConfirmed) {
+        const formValues = result.value;
+        console.log(formValues);
+
+        await axiosSecure.patch(`/updateTask?id=${task._id}`, formValues);
+        const { data } = await axiosSecure.get("/tasks");
+        setTasks(data);
+
+        Swal.fire("Task Updated", "", "success");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -62,7 +97,7 @@ const YourTask = () => {
                 ) : (
                   <p className="text-primary">Complete</p>
                 )}
-                <div className="card-actions justify-end">
+                <div className="card-actions flex justify-center items-center">
                   <button
                     onClick={() => handleDelete(task._id)}
                     className="btn btn-error"
@@ -70,12 +105,20 @@ const YourTask = () => {
                     Delete
                   </button>
                   {task.status === "incomplete" && (
-                    <button
-                      onClick={() => handleComplete(task._id)}
-                      className="btn btn-primary"
-                    >
-                      Mark as Complete
-                    </button>
+                    <>
+                      <button
+                        onClick={() => handleEdit(task)}
+                        className="btn btn-warning"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleComplete(task._id)}
+                        className="btn btn-primary"
+                      >
+                        Mark as Complete
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
