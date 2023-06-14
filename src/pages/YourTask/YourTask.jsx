@@ -46,6 +46,7 @@ const YourTask = () => {
             <div className="card-body">
               <h2 className="card-title">{task.taskName}</h2>
               <p>{task.taskDescription}</p>
+              <p>{task.date}</p>
               <div className="card-actions justify-end">
                 {task.status === "incomplete" ? (
                   <p className="text-red-600">Incomplete</p>
