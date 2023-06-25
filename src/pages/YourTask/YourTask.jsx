@@ -97,10 +97,10 @@ const YourTask = () => {
                 ) : (
                   <p className="text-primary">Complete</p>
                 )}
-                <div className="card-actions flex justify-center items-center">
+                <div className="card-actions flex ">
                   <button
                     onClick={() => handleDelete(task._id)}
-                    className="btn btn-error"
+                    className="btn btn-error text-white"
                   >
                     Delete
                   </button>
@@ -108,7 +108,7 @@ const YourTask = () => {
                     <>
                       <button
                         onClick={() => handleEdit(task)}
-                        className="btn btn-warning"
+                        className="btn btn-warning text-white"
                       >
                         Edit
                       </button>

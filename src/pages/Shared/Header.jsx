@@ -6,14 +6,6 @@ const Header = () => {
 
   const headerOptions = (
     <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "active-link" : "link")}
-        >
-          Home
-        </NavLink>
-      </li>
       {user && (
         <>
           <li>
