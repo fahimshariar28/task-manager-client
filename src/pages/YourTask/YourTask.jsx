@@ -2,6 +2,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const YourTask = () => {
   const { user, loading } = useAuth();
@@ -127,7 +128,12 @@ const YourTask = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center">
-          <h2 className="text-2xl text-center">No Tasks, Go to Add task</h2>
+          <h2 className="text-2xl text-center">
+            No Tasks, Go to{" "}
+            <Link to="/addtask" className="text-primary">
+              Add task
+            </Link>
+          </h2>
         </div>
       )}
     </div>

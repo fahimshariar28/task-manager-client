@@ -6,7 +6,7 @@ const Home = () => {
   const { user } = useAuth();
   return (
     <div>
-      <div className="hero min-h-screen bg-[url('https://i.ibb.co/6DftRB2/1-Svz-Kct-RCi8bw-B0-QPd-OZk-BP0p-Rhs-Oq-Zpl0wjs6y0.png')]">
+      <div className="hero md:min-h-screen w-full bg-[url('https://i.ibb.co/6DftRB2/1-Svz-Kct-RCi8bw-B0-QPd-OZk-BP0p-Rhs-Oq-Zpl0wjs6y0.png')]">
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
@@ -31,7 +31,7 @@ const Home = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src="https://i.ibb.co/k8mFc5c/task-management-tile-To-Do-0.png"
-            className="w-1/2 rounded-lg shadow-2xl"
+            className="w-full md:w-1/2 rounded-lg shadow-2xl"
           />
           <div>
             <p className="text-2xl text-primary">Get more done</p>
@@ -51,7 +51,7 @@ const Home = () => {
         <div className="hero-content flex-col lg:flex-row">
           <img
             src="https://i.ibb.co/Vm60SSv/4-communication-woes-pm-can-solve-blog.png"
-            className="w-1/2 rounded-lg shadow-2xl"
+            className="w-full md:w-1/2 rounded-lg shadow-2xl"
           />
           <div>
             <p className="text-2xl text-primary">Clear your mind</p>
